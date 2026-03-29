@@ -5,8 +5,9 @@
 4. `git remote add origin git@github.com:agouliel/nginx_config.git`
 5. `git fetch`
 6. `git checkout -f main`
-7. `ln -s /opt/homebrew/var/www /Users/Shared/src/www` (or `ln -s /usr/share/nginx/html /Users/Shared/src/www`)
-8. follow the instructions in `nginx_site` repo
+7. copy `fullchain.pem` and `key.pem`
+8. `ln -s /opt/homebrew/var/www /Users/Shared/src/www` (or `ln -s /usr/share/nginx/html /Users/Shared/src/www`)
+9. follow the instructions in `nginx_site` repo
 
 # Description
 Two distinct architectural approaches for remote access. The first uses a traditional **Reverse Proxy with Port Forwarding**, while the second uses a modern **Zero Trust Tunnel**.
