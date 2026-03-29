@@ -1,0 +1,6 @@
+conf.d/
+*_params
+*.pem
+mime.types
+modules
+nginx.conf.bak*
