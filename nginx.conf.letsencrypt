@@ -1,0 +1,63 @@
+worker_processes  1;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    sendfile        on;
+
+    keepalive_timeout  65;
+
+    server {
+        listen       80;
+        server_name  agouliel.ddns.net;
+
+        location ~ /.well-known {
+          #root /usr/local/homebrew/var/www/letsencrypt;
+          root /opt/homebrew/var/www/letsencrypt;
+        }
+
+        location / {
+            root   html;
+            index  index.html index.htm;
+        }
+
+        # https://nginx.org/en/docs/beginners_guide.html
+        # https://www.digitalocean.com/community/tutorials/understanding-nginx-server-and-location-block-selection-algorithms
+        location = /about {
+          root html/about;
+          #root /usr/local/homebrew/var/www/about;
+          index index.html;
+        }
+
+        # redirect server error pages to the static page /50x.html
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+    }
+
+    # another virtual host using mix of IP-, name-, and port-based configuration
+    #server {
+    #    listen       8000;
+    #    listen       somename:8080;
+    #    server_name  somename  alias  another.alias;
+    #}
+
+    # HTTPS server
+    #server {
+    #    listen       443 ssl;
+    #    server_name  localhost;
+    #    ssl_certificate      cert.pem;
+    #    ssl_certificate_key  cert.key;
+    #    ssl_session_cache    shared:SSL:1m;
+    #    ssl_session_timeout  5m;
+    #    ssl_ciphers  HIGH:!aNULL:!MD5;
+    #    ssl_prefer_server_ciphers  on;
+    #}
+    include servers/*;
+}
