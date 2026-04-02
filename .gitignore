@@ -4,3 +4,9 @@ conf.d/
 mime.types
 modules
 nginx.conf.bak*
+*.default
+*.original
+fastcgi.conf
+koi-utf
+koi-win
+win-utf
