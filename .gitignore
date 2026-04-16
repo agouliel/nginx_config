@@ -1,6 +1,7 @@
 conf.d/
 *_params
 *.pem
+*.pem.old
 mime.types
 modules
 nginx.conf.bak*
