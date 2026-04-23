@@ -21,3 +21,10 @@ In the second solution, the `cloudflared` utility on the machine establishes an 
 2. `agouliel.ddns.net:443` (HTTPS)
 3. `www.goulielmos.org:80` (or `alex` or `alexandros`): in this case, we are sending unencrypted traffic locally inside the machine (the tunnel itself is already encrypted)
 4. if in Cloudflare dashboard we have a subdomain which forwards to `https://localhost` it requires the `"Origin Server Name"` setting to be `"agouliel.ddns.net"`. This setting tells the tunnel: "Even though the user typed `subdomain.goulielmos.org` in their browser, when you connect to the machine, tell Nginx that you are looking for `agouliel.ddns.net`." This "tricks" Nginx into matching the request to the existing HTTPS server block. Nginx is configured with `ssl_certificate fullchain.pem` which is tied to the `agouliel.ddns.net` domain.
+
+# Subdomains
+1. Add DNS record
+2. `certbot certonly --nginx -d subdomain.goulielmos.org`
+3. `ln -s /etc/letsencrypt/live/subdomain.goulielmos.org/fullchain.pem fullchain_subdomain.pem`
+4. `ln -s /etc/letsencrypt/live/subdomain.goulielmos.org/privkey.pem key_subdomain.pem`
+5. `nginx.conf`: add `server` blocks for HTTP and HTTPS
